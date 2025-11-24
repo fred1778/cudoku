@@ -14,7 +14,6 @@ int main(int argc, char *argv[]) {
     loadFile(filename, &thisPuzzle);
 
 
-
     return 0;
 }
 
@@ -67,8 +66,41 @@ void validateInput(int argc, char *argv[]) {
 bool solvePuzzle(puzzle *pz){
 // first check is line completion checks
 
+for(int i = 0; i < SIZE; i++) {
+
+    lineCompletionCheck(pz, i, HORIZONTAL);
+    lineCompletionCheck(pz, i, VERTICAL);
+
+}
 
 
 
 
 }
+
+
+
+
+
+
+bool lineCompletionCheck(puzzle *pz, int seq, direction dir){
+
+    // first pass identifies
+
+    int missing_count = 0;
+    int line[SIZE];
+
+    for (int i = 0; i < SIZE; i++)
+    {
+       int tile = pz->board[dir == VERTICAL ? i : seq][dir == VERTICAL ? seq : i];
+       line[i] = tile;
+       if (tile == 0)
+       {
+           missing_count++;
+       }
+    }
+
+
+    
+}
+
