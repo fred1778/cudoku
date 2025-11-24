@@ -6,13 +6,25 @@
 
 
 #define SIZE 9
+#define TOTALLEN SIZE * SIZE
 
+enum lineMode
+{
+    NOZERO,
+    LINE,
+    TOTAL
+};
 
-enum direction { VERTICAL, HORIZONTAL };
+typedef enum lineMode lineMode;
+
+enum direction
+{
+    VERTICAL,
+    HORIZONTAL
+};
 typedef enum direction direction;
 struct puzzle {
-    char hawk;
-    int board[SIZE][SIZE];
+    int flatline[TOTALLEN];
 };
 typedef struct puzzle puzzle;
 
@@ -22,3 +34,7 @@ bool extractPuzzle(FILE *file, puzzle *pz);
 bool loadFile(const char *filename, puzzle *pz);
 bool solvePuzzle(puzzle *pz);
 bool lineCompletionCheck(puzzle *pz, int seq, direction dir);
+bool identifyMissing(int *range);
+void missingUpdate(int *missing, int cell);
+void DEBUG_arrPrint(int *toprint, lineMode mode);
+void cleanArray(int *arr, int size);
