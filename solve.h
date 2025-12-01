@@ -29,11 +29,11 @@ struct puzzle {
 typedef struct puzzle puzzle;
 
 void loadLineToPuzzle(char *line, puzzle *pz, int row);
-void validateInput(int argc, char *argv[]);
+void validateInput(int argc);
 bool extractPuzzle(FILE *file, puzzle *pz);
 bool loadFile(const char *filename, puzzle *pz);
 bool solvePuzzle(puzzle *pz);
-bool lineCompletionCheck(puzzle *pz, int seq, direction dir);
+bool lineCompletionCheck(puzzle *pz, int seq /*direction dir*/);
 bool identifyMissing(int *range);
 void missingUpdate(int *missing, int cell);
 void DEBUG_arrPrint(int *toprint, lineMode mode);

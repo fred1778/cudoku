@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]) {
     printf("%i\n", argc);
-    validateInput(argc, argv);
+    validateInput(argc);
 
     puzzle thisPuzzle;
     char *filename = argv[1];
@@ -38,7 +38,6 @@ bool extractPuzzle(FILE* file, puzzle* output){
    line[0] = '\0';
    int row_count = 0;
    // Unsigned long to match strlen() return for line_size_check()
-   unsigned long row_length = 0; 
    while(fgets(line, 100, file) != NULL){
         loadLineToPuzzle(line, output, row_count);
  
@@ -59,7 +58,7 @@ void loadLineToPuzzle(char* line, puzzle* pz, int row) {
     }
 }
 
-void validateInput(int argc, char *argv[]) {
+void validateInput(int argc) {
     if (argc != 2) {
         EXIT_FAILURE;
     }
@@ -76,14 +75,14 @@ bool solvePuzzle(puzzle *pz){
         if (pz->flatline[cell] == 0)
         {
             // Empty cell, begin checks from quick win to harder...
-            lineCompletionCheck(pz, cell, VERTICAL);
+            lineCompletionCheck(pz, cell);
         }
 }
 
 return true;
 }
 
-bool lineCompletionCheck(puzzle *pz, int seq, direction dir){
+bool lineCompletionCheck(puzzle *pz, int seq /*direction dir*/){
 
     // this is for 'colums'
     int localPosition = seq % SIZE;
