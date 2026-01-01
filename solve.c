@@ -6,13 +6,10 @@
 
 
 int main(int argc, char *argv[]) {
-    printf("%i\n", argc);
     validateInput(argc);
-
     puzzle thisPuzzle;
     char *filename = argv[1];
     if(loadFile(filename, &thisPuzzle)){
-
         solvePuzzle(&thisPuzzle);
     }
 
@@ -20,6 +17,7 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
 
 bool loadFile(const char* fname, puzzle* str){
    if(fname == NULL || str == NULL){
@@ -62,7 +60,6 @@ void validateInput(int argc) {
     if (argc != 2) {
         EXIT_FAILURE;
     }
-    
    
 }
 
@@ -74,43 +71,15 @@ bool solvePuzzle(puzzle *pz){
     {
         if (pz->flatline[cell] == 0)
         {
+            //printf("xxxxx empty cell");
             // Empty cell, begin checks from quick win to harder...
-            lineCompletionCheck(pz, cell);
         }
 }
 
 return true;
 }
 
-bool lineCompletionCheck(puzzle *pz, int seq /*direction dir*/){
 
-    // this is for 'colums'
-    int localPosition = seq % SIZE;
-    printf(">>>>> <%i/%i> %i\n", seq, SIZE, localPosition);
-    int present[SIZE];
-    cleanArray(present, SIZE);
-
-    for (int i = localPosition; i < SIZE; i += SIZE)
-    {
-        printf("%i\n", pz->flatline[i]);
-        if (pz->flatline[i] != 0)
-        {
-            present[i] = pz->flatline[i];
-        }
-    }
-    DEBUG_arrPrint(present, LINE);
-    return true;
-}
-
-void missingUpdate(int *missing, int cell){
-    for (int i = 0; i < SIZE; i++){
-        if(cell == missing[i]){
-            missing[i] = 0;
-
-        }
-
-    }
-}
 
 // Generic function to print int arrays in different contexts (defined by lineMode)
 void DEBUG_arrPrint(int *toprint, lineMode mode){
